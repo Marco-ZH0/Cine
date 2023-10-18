@@ -1,0 +1,37 @@
+body{
+    background-color: rgb(0, 0, 0);
+    color: azure;
+}
+
+body {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+#tarjeta {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    padding-left: 0%;
+    border: 1px solid;
+    border-radius: 10px;
+    box-shadow: 0 0 10px;
+}
+
+#imagen {
+    width: 45%;
+    height: auto;
+}
+
+/* #tabla , #imagen{
+    align-items: center;
+    width: 45%;
+} */
+
+
+
+input{
+border-radius: 5px;
+width: 250px;
+}

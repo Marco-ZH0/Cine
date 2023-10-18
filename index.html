@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="img/logo.jpg" type="image/x-icon">
+    <link rel="manifest" href="manifest.json">
+    <title>CINE</title>
+</head>
+<body>
+
+    <h1>Registro para Cine</h1><br>
+
+    <form action="" id="reg">
+    <div id="tarjeta">
+        <h3>Nombre: </h3>
+        <input type="text" name="" id="nombre" required>
+        <h3>Correo:</h3>
+        <input type="text" name="" id="correo" required>
+        <h3>Selecciona pelicula:</h3>
+        <select name="" id="pelicula" value=""> 
+            <option value="" disabled selected> Selecciona la Pelicula</option>
+            <option value="Saw X">Saw X</option>
+            <option value="La monja">La monja</option>
+            <option value="Chucky">Chucky</option>
+            <option value="El conjuro">El conjuro</option>
+            <option value="Insidius">Insidius</option>
+    </select>
+    <h3>Imagen</h3>
+    <input type="image" src="img/1.jpg" width = '10px' id="imagen">
+    <h3>Cantidad de boletos</h3>
+        <input type="number" name="" id="boletos" required> <br><br>
+        <input type="button" value="Guardar" id="Guardar" onclick="ordenar()" class="btn btn-secondary">
+    </div>
+</form>
+<div>
+
+   <center> <div class="col">
+        <hr> 
+        <div class="row xl-12 lg-12 md-12 sm-12 xs-12">
+        <table style="display: none;" class="table table-dark table-striped" id="tabla">
+            <tr>
+                <td class="text-white celdas"><b>Nombre</b></td>
+                <td class="text-white celdas"><b>Correo</b></td>
+                <td class="text-white celdas"><b>Pelicula</b></td>
+                <td class="text-white celdas"><b>Poster</b></td>
+                <td class="text-white celdas"><b>Numero de boletos</b></td>
+                <td class="text-white celdas"><b>Total</b></td>
+                <td class="text-white celdas"><b>Opciones</b></td>
+            </tr>
+            <tr>
+                <td class="celdas" id="tn"></td>
+                <td class="celdas" id="tc"></td>
+                <td class="celdas" id="tp"></td>
+                <td class="celdas" id="tpo"></td>
+                <td class="celdas" id="tnu"></td>
+                <td class="celdas" id="tt"></td>
+                <td class="celdas" id="top"></td>
+            </tr>
+        </table></div>
+    <!-- </div> -->
+</div></center>
+<script src="js/app.js"></script>
+
+<script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener("load", function(){
+                navigator.serviceWorker
+                .register("sw.js")
+                .then(res => console.log('Service Worker registrado con éxito:'))
+                .catch(err => console.log('Error al registrar el Service Worker:'))
+            })
+        }
+</script>
+</body>
+
+</html>
