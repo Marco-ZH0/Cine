@@ -1,129 +1,122 @@
-if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('Cine/sw.js')
-      .then(function(registration) {
-        console.log('Service Worker registrado con éxito:', registration);
-      })
-      .catch(function(error) {
-        console.log('Error al registrar el Service Worker:', error);
-      });
-  }
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker
+    .register("../sw.js")
+    .then(function (registration) {
+      console.log("Service Worker registrado con éxito:", registration);
+    })
+    .catch(function (error) {
+      console.log("Error al registrar el Service Worker:", error);
+    });
+}
+
+const form = document.getElementById("miFormulario"); 
+
+// Agregar un evento de submit al formulario
+form.addEventListener("submit", (event) => {
+  // Prevenir el comportamiento por defecto del formulario
+  event.preventDefault();
+
+  // Obtener los valores del formulario
+  const nombre = document.getElementById("nombre").value;
+  const correo = document.getElementById("correo").value;
+  const peliculas = document.getElementById("peliculas").value;
+  const peliculaPoster = document.getElementById("posterPelicula").src;
+  const boletos = document.getElementById("boletos").value;
+  const precio = 50;
+  // Crear una nueva fila en la tabla
+  const fila = tabla.insertRow();
+
+  // Crear celdas para cada valor del formulario
+  const celdaNombre = fila.insertCell();
+  const celdaCorreo = fila.insertCell();
+  const celdaPeliculas = fila.insertCell();
+  const celdaPosterPelicula = fila.insertCell();
+  const celdaBoletos = fila.insertCell();
+  const celdaTotal = fila.insertCell();
+  const celdaEliminarActulizar = fila.insertCell();
+  // Asignar los valores del formulario a las celdas
+  celdaNombre.innerHTML = nombre;
+  celdaCorreo.innerHTML = correo;
+  celdaPeliculas.innerHTML = peliculas;
+  celdaPosterPelicula.innerHTML = `<img src="${peliculaPoster}" alt="Poster de la película" width="50px" height="70px">`;
+  celdaBoletos.innerHTML = boletos;
+  const total = boletos * precio;
+  celdaTotal.innerHTML = `$` + total;
+  celdaEliminarActulizar.innerHTML = `<button type="button" class="btn btn-primary editar">Editar</button>
+  <button type="button" class="btn btn-danger eliminar" >Eliminar</button>
+`;
+  // Limpiar el formulario
+  form.reset();
+  posterPelicula.src = "img/1.jpg";
+  alert("Guardado correctamente");
+});
+
+const tabla = document.getElementById("tabla"); 
+
+// Escucha los clics en los botones de "Editar" y "Eliminar"
+tabla.addEventListener("click", function (event) {
+  if (event.target.classList.contains("editar")) {
+    
+       // Obtén la fila a editar
+       const fila = event.target.closest("tr");
+       if (fila) {
+         // Extrae los datos de la fila seleccionada para editar
+         const nombre = fila.cells[0].textContent;
+         const correo = fila.cells[1].textContent;
+         const peliculas = fila.cells[2].textContent;
+         const boletos = fila.cells[4].textContent;
   
-  function ordenar(){
-    mostrarTabla();
-    var nombre;
-    var correo;
-    var pelicula;
-    var imagen;
-    var boletos;
-    var total;
+         // Rellena el formulario con los datos de la fila
+         document.getElementById("nombre").value = nombre;
+         document.getElementById("correo").value = correo;
+         document.getElementById("peliculas").value = peliculas;
+         document.getElementById("boletos").value = boletos;
 
-    tn = document.getElementById('tn').value;
+         // Elimina la fila seleccionada
+         fila.remove();
+       }
 
-    nombre = document.getElementById('nombre').value;
-    correo = document.getElementById('correo').value;
-    pelicula = document.getElementById('pelicula').value;
-    imagen = document.getElementById('imagen').value;
-    boletos = document.getElementById('boletos').value;
-    total = parseFloat(boletos) * 50;
-
-    document.getElementById('tn').innerHTML = nombre;
-    document.getElementById('tc').innerHTML = correo;
-    document.getElementById('tp').innerHTML = pelicula;
-    if(pelicula==''){
-        document.getElementById('tpo').innerHTML = `<input type="image" src="img/1.jpg" width="5px"  id="imagen">`;
+  } else if (event.target.classList.contains("eliminar")) {
+    // Código para eliminar la fila
+    var rE = confirm("¿Seguro que desea eliminar?");
+    if (rE == true) {
+    const rowIndex = event.target.parentElement.parentElement.rowIndex;
+    tabla.deleteRow(rowIndex);
+    alert("Registro eliminado con exito");
     }
-    if(pelicula=='Saw X'){
-        document.getElementById('tpo').innerHTML = `<input type="image" src="img/2.jpg" width="5px"  id="imagen">`;
+    else{
+      alert("Eliminacion cancelada");
     }
-    else if(pelicula=='La monja'){
-        document.getElementById('tpo').innerHTML = `<input type="image" src="img/3.jpg" width = '100px' id="imagen">`;
-    }
-    else if(pelicula=='Chucky'){
-        document.getElementById('tpo').innerHTML = `<input type="image" src="img/4.jpg" width = '100px' id="imagen">`;
-    }
-    else if(pelicula=='El conjuro'){
-        document.getElementById('tpo').innerHTML = `<input type="image" src="img/5.jpg" width = '100px' id="imagen">`;
-    }
-    else if(pelicula=='Insidius'){
-        document.getElementById('tpo').innerHTML = `<input type="image" src="img/6.jpg" width = '100px' id="imagen">`;
-    }
-    
-    document.getElementById('tnu').innerHTML = boletos;
-    document.getElementById('tt').innerHTML = total;
-    document.getElementById('top').innerHTML = `<button width="100px" onclick="mostrarTabla()"><i class="bi bi-pencil-fill"></class=></button></i>
-    <button onclick="limpiar()"><i class="bi bi-file-earmark-x"></button></i>`;
-
-    // document.getElementById('nombre').value = "";
-    // document.getElementById('correo').value = "";
-    // document.getElementById('pelicula').value = "";
-    // document.getElementById('imagen').value=  "";
-
-}
-
-function actualizar(){
-    let imagen = document.getElementById('imagen');
-    if(pelicula == '1'){
-        
-        imagen.src = "img/1.jpg";
-        imagen.style.width = '300px';
-    }
-}
-
-function mostrarTabla() {
-    var reg = document.getElementById("reg");
-    var tabla = document.getElementById("tabla");
-    
-    if (reg.style.display !== "none") {
-        // Si el input está visible, lo ocultamos y mostramos la tabla
-        reg.style.display = "none";
-        tabla.style.display = "block";
-    } else {
-        // Si el input está oculto, lo mostramos y ocultamos la tabla
-        reg.style.display = "block";
-        tabla.style.display = "none";
-    }
-}
-
-function limpiar() {
-    mostrarTabla();
-    nombre.value = "";
-    correo.value = "";
-    imagen.value = `<input type="image" src="img/1.jpg" width = '100px' id="imagen">`;
-    pelicula.value = "";
-    boletos.value = "";
-    total.value = "";
-    
-}
+  }
+});
 
 
-    // var select = document.getElementById('pelicula').value;
-    // var imagen = document.getElementById('imagen').value;
-    const nombrePeliculas = document.getElementById("pelicula");
-    const imagen = document.getElementById("imagen");
-    
-    nombrePeliculas.addEventListener(
-        "change",
-        function () {
-          switch (this.value) {
-            case "Saw X":
-                imagen.src = "img/2.jpg";
-              break;
-            case "La monja":
-                imagen.src = "img/3.jpg";
-              break;
-            case "Chucky":
-                imagen.src = "img/4.jpg";
-              break;
-            case "El conjuro":
-                imagen.src = "img/5.jpg";
-              break;
-            case "Insidius":
-                imagen.src = "img/6.jpg";
-              break;
-            default:
-                imagen.src = "img/1.webp";
-              break;
-          }
-        },
-        false
-      );
+const nombrePeliculas = document.getElementById("peliculas");
+const posterPelicula = document.getElementById("posterPelicula");
+
+nombrePeliculas.addEventListener(
+  "change",
+  function () {
+    switch (this.value) {
+      case "Saw X":
+        posterPelicula.src = "img/2.jpg";
+        break;
+      case "La monja":
+        posterPelicula.src = "img/3.jpg";
+        break;
+      case "Chucky":
+        posterPelicula.src = "img/4.jpg";
+        break;
+      case "El conjuro":
+        posterPelicula.src = "img/5.jpg";
+        break;
+      case "Insidius":
+        posterPelicula.src = "img/6.jpg";
+        break;
+      default:
+        posterPelicula.src = "img/1.jpg";
+        break;
+    }
+  },
+  false
+);
