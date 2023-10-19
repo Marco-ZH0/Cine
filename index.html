@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#000000">
@@ -10,72 +10,102 @@
     <link rel="shortcut icon" href="img/logo.jpg" type="image/x-icon">
     <link rel="manifest" href="manifest.json">
     <title>CINE</title>
-</head>
-<body>
+  </head>
+  <body class="bg-dark text-light">
 
-    <h1>Registro para Cine</h1><br>
+    <h1>Registro para Cine</h1>
+    <main>
+        <div id="tarjeta">
+      <section class="row">
+        <article class="col formularioPelicula">
+          <form class="m-3" id="miFormulario">
+            <label class="form-label" for="nombre">Nombre:</label>
+            <input class="form-control" type="text" id="nombre" name="nombre" />
 
-    <form action="" id="reg">
-    <div id="tarjeta">
-        <h3>Nombre: </h3>
-        <input type="text" name="" id="nombre" required>
-        <h3>Correo:</h3>
-        <input type="email" name="" id="correo" required>
-        <h3>Selecciona pelicula:</h3>
-        <select name="" id="pelicula" value=""> 
-            <option value="" disabled selected> Selecciona la Pelicula</option>
-            <option value="Saw X">Saw X</option>
+            <label class="form-label" for="correo">Correo:</label>
+            <input
+              class="form-control"
+              type="email"
+              id="correo"
+              name="correo"
+            />
+
+            <label class="form-label" for="peliculas">Peliculas:</label>
+            <select class="form-select" name="peliculas" id="peliculas">
+              <option value="" disabled selected>Selecciona la pelicula</option>
+              <option value="Saw X">Saw X</option>
             <option value="La monja">La monja</option>
             <option value="Chucky">Chucky</option>
             <option value="El conjuro">El conjuro</option>
             <option value="Insidius">Insidius</option>
-    </select>
-    <h3>Imagen</h3>
-    <input type="image" src="img/1.jpg" width = '10px' id="imagen">
-    <h3>Cantidad de boletos</h3>
-        <input type="number" name="" id="boletos" required> <br><br>
-        <input type="button" value="Guardar" id="Guardar" onclick="ordenar()" class="btn btn-secondary">
+            </select>
+
+            <label class="form-label" for="boletos">Numero de boletos:</label>
+            <input
+              class="form-control"
+              type="number"
+              id="boletos"
+              name="boletos"
+            />
+            <div >
+              <br><input
+              class="btn btn-secondary"
+                type="submit"
+                value="Guardar"
+              />
+            </div>
+          </form>
+        </article>
+        <article class="col">
+          <article class="imagenPelicula">
+            <img
+              class="p-3"
+              id="posterPelicula"
+              src="img/1.jpg"
+              alt=""
+              width="200px"
+              height="300px"
+            />
+          </article>
+        </article>
+      </section>
     </div>
-</form>
-<div>
 
-   <center> <div class="col">
-        <hr> 
-        <div class="table-responsive">
-        <table style="display: none;" class="table table-dark table-striped" id="tabla">
-            <tr>
-                <td class="text-white celdas"><b>Nombre</b></td>
-                <td class="text-white celdas"><b>Correo</b></td>
-                <td class="text-white celdas"><b>Pelicula</b></td>
-                <td class="text-white celdas"><b>Poster</b></td>
-                <td class="text-white celdas"><b>Numero de boletos</b></td>
-                <td class="text-white celdas"><b>Total</b></td>
-                <td class="text-white celdas"><b>Opciones</b></td>
-            </tr>
-            <tr>
-                <td class="celdas" id="tn"></td>
-                <td class="celdas" id="tc"></td>
-                <td class="celdas" id="tp"></td>
-                <td class="celdas" id="tpo"></td>
-                <td class="celdas" id="tnu"></td>
-                <td class="celdas" id="tt"></td>
-                <td class="celdas" id="top"></td>
-            </tr>
-        </table></div>
-    <!-- </div> -->
-</div></center>
-<script src="js/app.js"></script>
 
-<script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener("load", function(){
-                navigator.serviceWorker
-                .register("sw.js")
-                .then(res => console.log('Service Worker registrado con éxito:'))
-                .catch(err => console.log('Error al registrar el Service Worker:'))
-            })
-        }
-</script>
-</body>
 
+
+
+<br><br>
+
+
+      <section class="d-grid gap-2 mb-3">
+        <article class="table-responsive">
+          <table class="table table-dark table-striped" id="tabla">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Pelicula</th>
+                <th>Poster</th>
+                <th>Boletos</th>
+                <th>Total</th>
+                <th>Opciones</th>
+              </tr>
+            </thead>
+            <tbody id="miTabla"></tbody>
+          </table>
+        </article>
+      </section>
+    </main>
+
+    <div class="posters" style="display: none">
+      <img src="img/2.jpg" alt="" />
+      <img src="img/3.jpg" alt="" />
+      <img src="img/4.jpg" alt="" />
+      <img src="img/5.jpg" alt="" />
+      <img src="img/6.jpg" alt="" />
+    </div>
+
+    <script src="js/app.js"></script>
+  </body>
 </html>
